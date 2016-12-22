@@ -39,7 +39,7 @@ class enigma:
     rotor_positions:  iterable with the initial positions of the 4 cylinders [0,25]
     """
 
-    self.rotors=[rotor(0, rotor_positions[0]) for i in range(4)]
+    self.rotors=[rotor(i, rotor_positions[i]) for i in range(4)]
 
   def encode_key(self, char):
 
@@ -63,5 +63,30 @@ class enigma:
 
   def iterate(self):
 
-    any([i.rotate() for i in self.rotors])
-    
+    if self.rotors[0].rotate():
+      if self.rotors[1].rotate():
+        if self.rotors[2].rotate():
+          self.rotors[3].rotate()
+
+rotorpos=(1,2,5,2)
+test=enigma(rotorpos)
+testout=""
+totest="thisisatest"
+
+print totest
+
+for i in totest:
+  i=test.encode_key(i)
+  testout+=i 
+
+print testout
+test=enigma(rotorpos)
+
+testf=""
+for i in testout:
+  i=test.decode_key(i)
+  testf+=i
+
+print testf
+
+
