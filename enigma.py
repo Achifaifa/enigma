@@ -107,26 +107,27 @@ class enigma:
     for i in self.rotors:
       if i.rotate(): break
 
+# Encoding/decoding functions
+def enigma_encode(machine, string):
+
+  return "".join([machine.encode_key(i) for i in string])
+
+def enigma_decode(machine, string):
+
+  return "".join([machine.decode_key(i) for i in string])
+
+
 rotorpos=(1,2,5,2)
 plugboard=("zq", "ba", "ti")
+words="thisisatest"
+print words
+
 test=enigma(rotorpos, plugboard)
-testout=""
-totest="thisisatest"
+codewords=enigma_encode(test, words)
+print codewords
 
-print totest
-
-for i in totest:
-  i=test.encode_key(i)
-  testout+=i 
-
-print testout
 test=enigma(rotorpos, plugboard)
-
-testf=""
-for i in testout:
-  i=test.decode_key(i)
-  testf+=i
-
-print testf
+plaintext=enigma_decode(test, codewords)
+print plaintext
 
 
