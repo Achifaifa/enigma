@@ -63,10 +63,8 @@ class enigma:
 
   def iterate(self):
 
-    if self.rotors[0].rotate():
-      if self.rotors[1].rotate():
-        if self.rotors[2].rotate():
-          self.rotors[3].rotate()
+    for i in self.rotors:
+      if i.rotate(): break
 
 rotorpos=(1,2,5,2)
 test=enigma(rotorpos)
@@ -77,6 +75,8 @@ print totest
 
 for i in totest:
   i=test.encode_key(i)
+  for z in test.rotors: print z.position,
+  print
   testout+=i 
 
 print testout
